@@ -12,7 +12,7 @@ int main() {
     string operation, trigOperation, angleType;
     char answer;
 
-    cout << "Basic Terminal Calculator v0.16, macOS build. ";
+    cout << "Basic Terminal Calculator v0.17, macOS build. ";
     cout << "Cleared Display.";
     system("clear");
 
