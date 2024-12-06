@@ -5,11 +5,12 @@
 #include <limits> // For numeric_limits
 
 int main() {
+    int varsWasIgnored;
     double num1, num2, num3, result;
     std::string operation, trigOperation, angleType;
     char answer;
 
-    std::cout << "Basic Terminal Calculator v0.1, macOS build. ";
+    std::cout << "Basic Terminal Calculator v0.18, *nix build. ";
     std::cout << "Cleared Display.";
     system("clear");
 
@@ -30,7 +31,7 @@ int main() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
 
         // Asking for operation
-        std::cout << "What operation? Should be +, -, *, /, ^, trig, or root (square root). Type 'help' for help.:";
+        std::cout << "What operation? Should be +, -, *, /, ^, trig, or sqrt. Type 'help' for help.:";
         std::getline(std::cin, operation); // Use getline for full line input
 
         if (operation == "help") {
@@ -45,13 +46,15 @@ int main() {
         }
 
         // Additional operations
-        if (operation == "root") {
+        if (operation == "sqrt") {
             if (num3 < 0) {
                 std::cout << "\nComplex numbers are not supported yet. Returning to beginning.";
+                varsWasIgnored = 0 + 1;
                 continue;
             }
             result = std::sqrt(num3);
         } else if (operation == "trig"){
+            varsWasIgnored = 0 + 1;
             std::cout << "Use degrees or radians? (deg or rad):";
             std::cin >> angleType;
             std::cin.ignore();
@@ -77,7 +80,7 @@ int main() {
                 } else if (angleType == "rad") {
                     result = std::cos(num3); // Uses radians by default.
                 } else {
-                    std::cout << "Invalid input for angle type. Returning to beginning.";
+                    std::cout << "Invalid input for angle type or input error. Returning to beginning.";
                     continue;
                 }
             } else if (trigOperation == "tan") {
@@ -109,20 +112,62 @@ int main() {
             result = num1 / num2;
         } else {
             std::cout << "\nInvalid operation. Returning to beginning.";
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
             continue;
         }
 
-        // Display result
+        // Display results
         system("clear");
-        std::cout << "\nFirst number was: " << num1;
-        std::cout << "\nSecond number was: " << num2;
+        std::cout << "\n 1 after the number means it was ignored.";
+        std::cout << "\nFirst number was: " << num1 << " " << varsWasIgnored;  
+        std::cout << "\nSecond number was: " << num2 << " " << varsWasIgnored;
         std::cout << "\nThird number was: " << num3;
         std::cout << "\nResult is: " << result;
 
         // Continue or exit
         std::cout << "\nDo you want to perform another calculation? (y/n):";
         std::cin >> answer;
-        if (answer != 'y' && answer != 'Y') break;
+        if (answer != 'y' && answer != 'Y') {
+            
+            break;
+        } else {
+            std::cout << "\nClear variables? (y/n)";
+            std::cin >> answer;
+            if (answer != 'n' && answer != 'N') {
+                std::cout << "Clearing variables...";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                result = 0;
+                std::cout << "\n Cleared variable 'result'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                num1 = 0;
+                std::cout << "\n Cleared variable 'num1'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                num2 = 0;
+                std::cout << "\n Cleared variable 'num2'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                num3 = 0;
+                std::cout << "\n Cleared variable 'num3'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                operation = "null";
+                std::cout << "\n Cleared string 'operation'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                trigOperation = "null";
+                std::cout << "\n Cleared string 'trigOperation'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                angleType = "null";
+                std::cout << "\n Cleared string 'angleType'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                answer = '0';
+                std::cout << "\n Cleared char 'answer'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                varsWasIgnored = 0;
+                std::cout << "\n Cleared variable 'varsWasIgnored'.";
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                std::cin.ignore();
+                system("clear");
+
+            }
+        }
 
         system("clear");
     }
