@@ -8,3 +8,7 @@ Do not use this, as my code is:
 * Design is horrible (I also need to learn ncurses).
 
 Anyway, peace out. i'll develop random projects every once in a while and add them under their own folder. 
+
+
+
+* Do not look at any issues made by me, they are all extremely stupid.
