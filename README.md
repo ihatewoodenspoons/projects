@@ -6,3 +6,5 @@ Do not use this, as my code is:
 * Highly unoptimized
 * Buggy
 * Design is horrible (I also need to learn ncurses).
+
+Anyway, peace out. i'll develop random projects every once in a while and add them under their own folder. 
