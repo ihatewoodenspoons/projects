@@ -135,37 +135,15 @@ int main() {
             std::cin >> answer;
             if (answer != 'n' && answer != 'N') {
                 std::cout << "Clearing variables...";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 result = 0;
-                std::cout << "\n Cleared variable 'result'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 num1 = 0;
-                std::cout << "\n Cleared variable 'num1'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 num2 = 0;
-                std::cout << "\n Cleared variable 'num2'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 num3 = 0;
-                std::cout << "\n Cleared variable 'num3'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                operation = "null";
-                std::cout << "\n Cleared string 'operation'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                trigOperation = "null";
-                std::cout << "\n Cleared string 'trigOperation'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                angleType = "null";
-                std::cout << "\n Cleared string 'angleType'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                answer = '0';
-                std::cout << "\n Cleared char 'answer'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 varsWasIgnored = 0;
-                std::cout << "\n Cleared variable 'varsWasIgnored'.";
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                std::cin.ignore();
-                system("clear");
-
+                operation = "null";
+                trigOperation = "null";
+                angleType = "null";
+                answer = '0';
             }
         }
 
