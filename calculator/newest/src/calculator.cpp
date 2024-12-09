@@ -4,13 +4,15 @@
 #include <thread> // sleep stuff 2
 #include <limits> // For numeric_limits
 #include <iomanip> // setprecision 
+#include <algorithm> // For std::transform - basically just some stuff to make the code case-insensitive
+#include <cctype> // For std::tolower - basically also some stuff to make the code case-insensitive
 
 int main() {
     double num1, num2, num3, result;
     std::string operation, trigOperation, angleType, category;
     char answer;
 
-    std::cout << "Basic Terminal Calculator v0.18, *nix build. ";
+    std::cout << "Basic Terminal Calculator v0.19, *nix build. ";
     std::cout << "Cleared Display.";
     system("clear");
     std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
@@ -22,8 +24,10 @@ int main() {
         std::cout << "2. Trigonometric Operations (sin, cos, tan)";
         std::cout << "3. Advanced Operations (factorial, absolute value)";
         std::cout << "4. Experimental Operations (Solve for variable)";
+        std::cout << "All strings are also now case-insensitive as of v0.19, so no need to worry about that.";
         std::cin >> category;
-
+        std::cin.ignore();
+        
         // First Number
         std::cout << "\nEnter first number:";
         std::cin >> num1;
@@ -54,7 +58,7 @@ int main() {
             continue;
         }
 
-        // Additional operations
+        // Operation logic
         if (operation == "sqrt") {
             if (num3 < 0) {
                 std::cout << "\nComplex numbers are not supported yet. Returning to beginning.";
@@ -72,22 +76,23 @@ int main() {
             std::cin.ignore();
             std::cout << trigOperation;
 
+            // Running the function for the trigonometric functions like sin(var) uses radians by default.
             if (trigOperation == "sin") {
                 if (angleType == "deg") {
                     result = std::sin(num3 * M_PI / 180 );
                 } else if (angleType == "rad") {
-                    result = std::sin(num3); // Uses radians by default.
+                    result = std::sin(num3); 
                 } else {
-                    std::cout << "Invalid input for angle type or input error. Returning to beginning.";
+                    std::cout << "Invalid input for angle type/input error. Returning to beginning.";
                     continue;
                 }
             } else if (trigOperation == "cos") {
                 if (angleType == "deg") {
                     result = std::cos(num3 * M_PI / 180);
                 } else if (angleType == "rad") {
-                    result = std::cos(num3); // Uses radians by default.
+                    result = std::cos(num3); 
                 } else {
-                std::cout << "Invalid input for angle type or input error. Returning to beginning.";
+                std::cout << "Invalid input for angle type/input error. Returning to beginning.";
                     continue;
                 }
             } else if (trigOperation == "tan") {
@@ -96,7 +101,7 @@ int main() {
                 } else if (angleType == "rad") {
                     result = std::tan(num3);
                 } else {
-                    std::cout << "Invalid input for angle type or input error. Returning to beginning.";
+                    std::cout << "Invalid input for angle type/input error. Returning to beginning.";
                     continue;
                 }
             } else {
@@ -152,12 +157,10 @@ int main() {
                 answer = '0';
             }
         }
-
-        system("clear");
     }
 
     std::cout << "System returned error code 0.";
-    std::cout << "\n";
+    system("clear");
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     return 0;
 }
