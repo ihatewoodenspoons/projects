@@ -15,6 +15,15 @@ int main() {
     system("clear");
     std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
     while (true) {
+        
+        // Currently, this code has been left unused. It will be fully implemented in v0.19.
+        std::cout << "Select a category:";
+        std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^)";
+        std::cout << "2. Trigonometric Operations (sin, cos, tan)";
+        std::cout << "3. Advanced Operations (factorial, absolute value)";
+        std::cout << "4. Experimental Operations (Solve for variable)";
+        std::cin >> category;
+
         // First Number
         std::cout << "\nEnter first number:";
         std::cin >> num1;
