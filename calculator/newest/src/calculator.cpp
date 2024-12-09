@@ -1,19 +1,19 @@
-#include <iostream>
-#include <cmath>
-#include <chrono>
-#include <thread>
+#include <iostream> // Pf course it's here.
+#include <cmath> // because this is a calculator
+#include <chrono> // sleep stuff
+#include <thread> // sleep stuff 2
 #include <limits> // For numeric_limits
+#include <iomanip> // setprecision 
 
 int main() {
-    int varsWasIgnored;
     double num1, num2, num3, result;
-    std::string operation, trigOperation, angleType;
+    std::string operation, trigOperation, angleType, category;
     char answer;
 
     std::cout << "Basic Terminal Calculator v0.18, *nix build. ";
     std::cout << "Cleared Display.";
     system("clear");
-
+    std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
     while (true) {
         // First Number
         std::cout << "\nEnter first number:";
@@ -49,12 +49,10 @@ int main() {
         if (operation == "sqrt") {
             if (num3 < 0) {
                 std::cout << "\nComplex numbers are not supported yet. Returning to beginning.";
-                varsWasIgnored = 0 + 1;
                 continue;
             }
             result = std::sqrt(num3);
         } else if (operation == "trig"){
-            varsWasIgnored = 0 + 1;
             std::cout << "Use degrees or radians? (deg or rad):";
             std::cin >> angleType;
             std::cin.ignore();
@@ -80,7 +78,7 @@ int main() {
                 } else if (angleType == "rad") {
                     result = std::cos(num3); // Uses radians by default.
                 } else {
-                    std::cout << "Invalid input for angle type or input error. Returning to beginning.";
+                std::cout << "Invalid input for angle type or input error. Returning to beginning.";
                     continue;
                 }
             } else if (trigOperation == "tan") {
@@ -119,8 +117,8 @@ int main() {
         // Display results
         system("clear");
         std::cout << "\n 1 after the number means it was ignored.";
-        std::cout << "\nFirst number was: " << num1 << " " << varsWasIgnored;  
-        std::cout << "\nSecond number was: " << num2 << " " << varsWasIgnored;
+        std::cout << "\nFirst number was: " << num1;
+        std::cout << "\nSecond number was: " << num2;
         std::cout << "\nThird number was: " << num3;
         std::cout << "\nResult is: " << result;
 
@@ -139,7 +137,6 @@ int main() {
                 num1 = 0;
                 num2 = 0;
                 num3 = 0;
-                varsWasIgnored = 0;
                 operation = "null";
                 trigOperation = "null";
                 angleType = "null";
