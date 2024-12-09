@@ -20,11 +20,11 @@ int main() {
         
         // Currently, this code has been left unused. It will be fully implemented in v0.19.
         std::cout << "Select a category:";
-        std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^)";
-        std::cout << "2. Trigonometric Operations (sin, cos, tan)";
-        std::cout << "3. Advanced Operations (factorial, absolute value)";
-        std::cout << "4. Experimental Operations (Solve for variable)";
-        std::cout << "All strings are also now case-insensitive as of v0.19, so no need to worry about that.";
+        std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^)" << std::endl;
+        std::cout << "2. Trigonometric Operations (sin, cos, tan)" << std::endl;
+        std::cout << "3. Advanced Operations (factorial, absolute value)" << std::endl;
+        std::cout << "4. Experimental Operations (Solve for variable)" << std::endl;
+        std::cout << "All strings are also now case-insensitive as of v0.19, so no need to worry about that." << std::endl;
         std::cin >> category;
         std::cin.ignore();
         
