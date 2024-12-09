@@ -1,5 +1,7 @@
 Okay, so I'll explain what this whole entire 'projects' repository is all about.
 
+Also, my release schedule sucks.
+
 This was all created because I decided to begin learning C++. I'm mainly focusing on the calculator project.
 Do not use this, as my code is:
 
