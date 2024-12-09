@@ -12,14 +12,14 @@ int main() {
     std::string operation, trigOperation, angleType, category;
     char answer;
 
-    std::cout << "Basic Terminal Calculator v0.19, *nix build. ";
-    std::cout << "Cleared Display.";
+    std::cout << "Basic Terminal Calculator v0.19, *nix build. " << std::endl;
+    std::cout << "Cleared Display." << std::endl;
     system("clear");
     std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
     while (true) {
         
         // Currently, this code has been left unused. It will be fully implemented in v0.19.
-        std::cout << "Select a category:";
+        std::cout << "Select a category:" << std::endl;
         std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^)" << std::endl;
         std::cout << "2. Trigonometric Operations (sin, cos, tan)" << std::endl;
         std::cout << "3. Advanced Operations (factorial, absolute value)" << std::endl;
