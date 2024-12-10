@@ -58,6 +58,9 @@ int main() {
             std::cout << "\n- Enter 'help' at any time to show this guide.";
             std::cout << "\n- Returning you to the beginning.";
             continue;
+            // Next up, the stuff is actually put into order now yay
+        } else if (category == "basic" || category == "1") {
+            
         }
 
         // Operation logic
@@ -132,11 +135,10 @@ int main() {
 
         // Display results
         system("clear");
-        std::cout << "\n 1 after the number means it was ignored.";
-        std::cout << "\nFirst number was: " << num1;
-        std::cout << "\nSecond number was: " << num2;
-        std::cout << "\nThird number was: " << num3;
-        std::cout << "\nResult is: " << result;
+        std::cout << "\n- First number was: " << num1;
+        std::cout << "\n- Second number was: " << num2;
+        std::cout << "\n- Third number was: " << num3;
+        std::cout << "\n- Result is: " << result;
 
         // Continue or exit
         std::cout << "\nDo you want to perform another calculation? (y/n):";
