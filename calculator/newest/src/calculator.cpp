@@ -6,13 +6,21 @@
 #include <iomanip> // setprecision 
 #include <algorithm> // For std::transform - basically just some stuff to make the code case-insensitive
 #include <cctype> // For std::tolower - basically also some stuff to make the code case-insensitive
+#include <string> // To make life 7000 times easier when it comes to strings
+
+std::string toLowerCase(const std::string& str) {
+    std::string lowerStr = str;
+    std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
+            [](unsigned char c) { return std::tolower(c); });
+    return lowerStr;
+}
 
 int main() {
     double num1, num2, num3, result;
     std::string operation, trigOperation, angleType, category;
     char answer;
 
-    std::cout << "Basic Terminal Calculator v0.19, *nix build. " << std::endl;
+    std::cout << "Basic Terminal Calculator v0.19, Unix-like build." << std::endl;
     std::cout << "Cleared Display." << std::endl;
     system("clear");
     std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
@@ -24,33 +32,27 @@ int main() {
         std::cout << "2. Trigonometric Operations (sin, cos, tan)" << std::endl;
         std::cout << "3. Advanced Operations (factorial, absolute value)" << std::endl;
         std::cout << "4. Experimental Operations (Solve for variable)" << std::endl;
-        std::cout << "All strings are also now case-insensitive as of v0.19, so no need to worry about that." << std::endl;
+        std::cout << "5. Help Screen" << std::endl;
+        std::cout << "6. Release Notes" << std::endl;
+        std::cout << "Category selected: ";
         std::cin >> category;
-        std::cin.ignore();
-        
-        // First Number
-        std::cout << "\nEnter first number:";
-        std::cin >> num1;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clears buffer
+        category = toLowerCase(category);
 
-        // Second Number
-        std::cout << "\nEnter second number:";
-        std::cin >> num2;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
-
-        // Third Number
-        std::cout << "\nEnter third number used for square roots, trigonometric operations:";
-        std::cin >> num3;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
-
-        // Asking for operation
-        std::cout << "What operation? Should be +, -, *, /, ^, trig, or sqrt. Type 'help' for help.:";
-        std::getline(std::cin, operation); // Use getline for full line input
-
-        if (operation == "help") {
+        // This is gonna be part of the TO-DO, bleh
+        if (category == "release notes" || category == "6" || category == "notes" || category == "release") {
+            std::cout << "\n- Release notes for v0.19:";
+            std::cout << "\n- Added a feature, a creature feature, where you can set the category. It was added to make the UI look less garbage.";
+            std::cout << "\n- okay uhhm im not adding anything else as this is literally just a copy-paste from the help menu";
+            std::cout << "\n- For square roots, enter the number for which you want the square root or trig. operations (third number).";
+            std::cout << "\n- For all operations, excluding square roots, the first and second numbers are used.";
+            std::cout << "\n- jhadslkjshsjkfdlhdfsakjlhf";
+            std::cout << "\n- Returning you to the beginning.";
+            continue;
+        } else if (category == "help" || category == "5") {
             std::cout << "\n- HELP GUIDE:";
-            std::cout << "\n- Enter numbers for operations like addition, subtraction, multiplication, or division.";
-            std::cout << "\n- Operations available: +, -, *, /, ^ (power), root (square root).";
+            std::cout << "\n- ";
+            std::cout << "\n- Operations available: +, -, *, /, ^ (powers), sqrt (square root), and trig (trigonometric) operations.";
             std::cout << "\n- For square roots, enter the number for which you want the square root or trig. operations (third number).";
             std::cout << "\n- For all operations, excluding square roots, the first and second numbers are used.";
             std::cout << "\n- Enter 'help' at any time to show this guide.";
