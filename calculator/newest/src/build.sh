@@ -9,6 +9,7 @@ OUTPUT="calculator"
 # Compile the program
 g++ -std=c++17 $SRC_FILES -o $OUTPUT 
 
+
 # Check if the compilation was successful
 if [ $? -eq 0 ]; then
     echo "Build successful!"

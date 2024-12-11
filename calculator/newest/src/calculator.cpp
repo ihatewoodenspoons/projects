@@ -15,8 +15,22 @@ std::string toLowerCase(const std::string& str) {
     return lowerStr;
 }
 
+unsigned long long factorial(unsigned int n) {
+    unsigned long long result = 1;
+    for (unsigned int i = 1; i <= n; ++i) {
+        if (result > std::numeric_limits<unsigned long long>::max() / i) {
+            std::cerr << "Overflow error: Cannot compute factorial, as the value is too large.";
+            return 0;
+        }
+        result *= i;
+    }
+    return result;
+}
+
+
 int main() {
     double num1, num2, num3, result;
+    unsigned long long int num4longint;
     std::string operation, trigOperation, angleType, category;
     char answer;
 
@@ -28,123 +42,113 @@ int main() {
         
         // Currently, this code has been left unused. It will be fully implemented in v0.19.
         std::cout << "Select a category:" << std::endl;
-        std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^)" << std::endl;
+        std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^, factorial, abs.)" << std::endl;
         std::cout << "2. Trigonometric Operations (sin, cos, tan)" << std::endl;
-        std::cout << "3. Advanced Operations (factorial, absolute value)" << std::endl;
+        std::cout << "3. Conversion Operations" << std::endl;
         std::cout << "4. Experimental Operations (Solve for variable)" << std::endl;
-        std::cout << "5. Help Screen" << std::endl;
-        std::cout << "6. Release Notes" << std::endl;
+        std::cout << "4. Help Screen" << std::endl;
+        std::cout << "5. Release Notes" << std::endl;
+        std::cout << std::endl;
         std::cout << "Category selected: ";
         std::cin >> category;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clears buffer
         category = toLowerCase(category);
 
         // This is gonna be part of the TO-DO, bleh
-        if (category == "release notes" || category == "6" || category == "notes" || category == "release") {
-            std::cout << "\n- Release notes for v0.19:";
-            std::cout << "\n- Added a feature, a creature feature, where you can set the category. It was added to make the UI look less garbage.";
-            std::cout << "\n- okay uhhm im not adding anything else as this is literally just a copy-paste from the help menu";
-            std::cout << "\n- For square roots, enter the number for which you want the square root or trig. operations (third number).";
-            std::cout << "\n- For all operations, excluding square roots, the first and second numbers are used.";
-            std::cout << "\n- jhadslkjshsjkfdlhdfsakjlhf";
-            std::cout << "\n- Returning you to the beginning.";
+        if (category == "release notes" || category == "5" || category == "notes" || category == "release") {
+            std::cout << "- Release notes for v0.19:" << std::endl;
+            std::cout << "- Added a feature where you can set the category. It was added to make the UI look less garbage." << std::endl;
+            std::cout << "- HELP GUIDE is now outdated. Will be updated soon." << std::endl;
+            std::cout << "- Returning to beginning." << std::endl;
             continue;
-        } else if (category == "help" || category == "5") {
+        } else if (category == "help" || category == "4") {
             std::cout << "\n- HELP GUIDE:";
-            std::cout << "\n- ";
-            std::cout << "\n- Operations available: +, -, *, /, ^ (powers), sqrt (square root), and trig (trigonometric) operations.";
-            std::cout << "\n- For square roots, enter the number for which you want the square root or trig. operations (third number).";
-            std::cout << "\n- For all operations, excluding square roots, the first and second numbers are used.";
-            std::cout << "\n- Enter 'help' at any time to show this guide.";
-            std::cout << "\n- Returning you to the beginning.";
+            std::cout << "- THIS GUIDE IS OUTDATED, BUILT FOR CALCULATOR V0.18";
+            std::cout << "- Operations available: +, -, *, /, ^ (powers), sqrt (square root), and trig (trigonometric) operations.";
+            std::cout << "- For square roots, enter the number for which you want the square root or trig. operations (third number)." << std::endl;
+            std::cout << "- For all operations, excluding square roots, the first and second numbers are used."<< std::endl;
+            std::cout << "- Enter 'help' at any time to show this guide." << std::endl;
+            std::cout << "- Returning you to the beginning." << std::endl;
             continue;
-            // Next up, the stuff is actually put into order now yay
-        } else if (category == "basic" || category == "1") {
+            // Next up, get ready for the most unreadable mess ever!
+        } else if (category == "basic" || category == "1") { 
+            std::cout << "Clearing display.";
+            system("clear");
+            std::cout << "Input the first number: ";
+            std::cin >> num1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << "Input the second number: ";
+            std::cin >> num2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << "The third number is used for " << std::endl;
+            std::cout << "Input the third number: ";
+            std::cin >> num3;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << std::endl << "Enter the operation's symbol from the list below: " << std::endl;
+            std::cout << "1. Usual Operations (+, -, *, /, sqrt, ^ (power), cbrt (cube root))" << std::endl;
+            std::cout << "2. Advanced Operations (abs (absolute value), n! (factorial))" << std::endl;
+            std::cout << "3. Syntax Help" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Entered: ";
+            std::cin >> operation;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            operation = toLowerCase(operation);
             
-        }
 
-        // Operation logic
-        if (operation == "sqrt") {
-            if (num3 < 0) {
-                std::cout << "\nComplex numbers are not supported yet. Returning to beginning.";
-                continue;
-            }
-            result = std::sqrt(num3);
-        } else if (operation == "trig"){
-            std::cout << "Use degrees or radians? (deg or rad):";
-            std::cin >> angleType;
-            std::cin.ignore();
-            std::cout << angleType;
-
-            std::cout << "Enter a trigonometric function (sine, cosine, tangent). (sin, cos, tan)";
-            std::cin >> trigOperation;
-            std::cin.ignore();
-            std::cout << trigOperation;
-
-            // Running the function for the trigonometric functions like sin(var) uses radians by default.
-            if (trigOperation == "sin") {
-                if (angleType == "deg") {
-                    result = std::sin(num3 * M_PI / 180 );
-                } else if (angleType == "rad") {
-                    result = std::sin(num3); 
+            // Operation logic belowi
+            if (operation == "+") {
+                result = num1 + num2;
+            } else if (operation == "-") {
+                result = num1 - num2;
+            } else if (operation == "*") {
+                result = num1 * num2;
+            } else if (operation == "/") {
+                if (num2 == 0) {
+                    std::cerr << "Dividing by zero is not allowed." << std::endl;
                 } else {
-                    std::cout << "Invalid input for angle type/input error. Returning to beginning.";
-                    continue;
+                    result = num1 / num2;
                 }
-            } else if (trigOperation == "cos") {
-                if (angleType == "deg") {
-                    result = std::cos(num3 * M_PI / 180);
-                } else if (angleType == "rad") {
-                    result = std::cos(num3); 
+            } else if (operation == "sqrt" || operation == "sqroot" || operation == "square root") {
+                if (num3 < 0) {
+                    std::cerr << "Complex numbers are not yet supported." << std::endl;
                 } else {
-                std::cout << "Invalid input for angle type/input error. Returning to beginning.";
-                    continue;
+                    result = std::sqrt(num3);
                 }
-            } else if (trigOperation == "tan") {
-                if (angleType == "deg") {
-                    result = std::tan(num3 * M_PI / 180);
-                } else if (angleType == "rad") {
-                    result = std::tan(num3);
+            } else if (operation == "^" || operation == "power" || operation == "exponent") {
+                result = std::pow(num1, num2);
+            } else if (operation == "abs" || operation == "absolute" || operation == "absolute value") {
+                
+            } else if (operation == "fact" || operation == "factorial" || operation == "n!") {
+                std::cout << "Note that this WILL have issues with floating-point values." << std::endl;
+                std::cout << "For your sanity, the number has been rounded up to an integer." << std::endl;
+                std::cout << "Or, it will be disposed of if the number is negative." << std::endl;
+                if (num3 < 0) {
+                    std::cerr << "Factorial could be negative, cannot proceed.";
+                    system("clear");
+                    continue;
                 } else {
-                    std::cout << "Invalid input for angle type/input error. Returning to beginning.";
-                    continue;
+                    num4longint = std::nearbyint(num3);
+                    result = factorial(num4longint);
                 }
-            } else {
-                std::cout << "Invalid trigonometric function. Returning to beginning.";
-                continue; // Error handling
-            }
-        } else if (operation == "^") {
-            result = std::pow(num1, num2);
-        } else if (operation == "+") {
-            result = num1 + num2;
-        } else if (operation == "-") {
-            result = num1 - num2;
-        } else if (operation == "*") {
-            result = num1 * num2;
-        } else if (operation == "/") {
-            if (num2 == 0) {
-                std::cout << "\nDividing by zero is not allowed. Returning to beginning.";
-                continue;
-            }
-            result = num1 / num2;
+            } 
         } else {
-            std::cout << "\nInvalid operation. Returning to beginning.";
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            std::cerr << "An error has occured. Restarting program.";
+            system("clear");
             continue;
         }
 
         // Display results
         system("clear");
-        std::cout << "\n- First number was: " << num1;
-        std::cout << "\n- Second number was: " << num2;
-        std::cout << "\n- Third number was: " << num3;
-        std::cout << "\n- Result is: " << result;
+        std::cout << "- First number was: " << num1 << std::endl;
+        std::cout << "- Second number was: " << num2 << std::endl;
+        std::cout << "- Third number was: " << num3 << std::endl;
+        std::cout << "- Operation done was: " << operation << std::endl;
+        std::cout << "- Result is: " << result << std::endl;
 
         // Continue or exit
         std::cout << "\nDo you want to perform another calculation? (y/n):";
         std::cin >> answer;
         if (answer != 'y' && answer != 'Y') {
-            
             break;
         } else {
             std::cout << "\nClear variables? (y/n)";
@@ -163,7 +167,7 @@ int main() {
         }
     }
 
-    std::cout << "System returned error code 0.";
+    std::cout << "System returned error code 0." << std::endl;
     system("clear");
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     return 0;
