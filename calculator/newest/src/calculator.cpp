@@ -28,10 +28,11 @@ unsigned long long factorial(unsigned int n) {
 }
 
 
+
 int main() {
     double num1, num2, num3, result;
     unsigned long long int num4longint;
-    std::string operation, trigOperation, angleType, category;
+    std::string operation, trigOperation, angleType, category, subCategory;
     char answer;
 
     std::cout << "Basic Terminal Calculator v0.19, Unix-like build." << std::endl;
@@ -62,9 +63,9 @@ int main() {
             std::cout << "- Returning to beginning." << std::endl;
             continue;
         } else if (category == "help" || category == "4") {
-            std::cout << "\n- HELP GUIDE:";
-            std::cout << "- THIS GUIDE IS OUTDATED, BUILT FOR CALCULATOR V0.18";
-            std::cout << "- Operations available: +, -, *, /, ^ (powers), sqrt (square root), and trig (trigonometric) operations.";
+            std::cout << "- HELP GUIDE:" << std::endl;
+            std::cout << "- THIS GUIDE IS OUTDATED, BUILT FOR CALCULATOR V0.18" << std::endl;
+            std::cout << "- Operations available: +, -, *, /, ^ (powers), sqrt (square root), and trig (trigonometric) operations." << std::endl;
             std::cout << "- For square roots, enter the number for which you want the square root or trig. operations (third number)." << std::endl;
             std::cout << "- For all operations, excluding square roots, the first and second numbers are used."<< std::endl;
             std::cout << "- Enter 'help' at any time to show this guide." << std::endl;
@@ -80,7 +81,6 @@ int main() {
             std::cout << "Input the second number: ";
             std::cin >> num2;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            std::cout << "The third number is used for " << std::endl;
             std::cout << "Input the third number: ";
             std::cin >> num3;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
@@ -95,7 +95,7 @@ int main() {
             operation = toLowerCase(operation);
             
 
-            // Operation logic belowi
+            // Operation logic below
             if (operation == "+") {
                 result = num1 + num2;
             } else if (operation == "-") {
@@ -117,24 +117,41 @@ int main() {
             } else if (operation == "^" || operation == "power" || operation == "exponent") {
                 result = std::pow(num1, num2);
             } else if (operation == "abs" || operation == "absolute" || operation == "absolute value") {
-                
+                result = fabs(num3);
             } else if (operation == "fact" || operation == "factorial" || operation == "n!") {
                 std::cout << "Note that this WILL have issues with floating-point values." << std::endl;
                 std::cout << "For your sanity, the number has been rounded up to an integer." << std::endl;
                 std::cout << "Or, it will be disposed of if the number is negative." << std::endl;
                 if (num3 < 0) {
-                    std::cerr << "Factorial could be negative, cannot proceed.";
+                    std::cerr << "Factorial could be negative, cannot proceed." << std::endl;
                     system("clear");
                     continue;
                 } else {
                     num4longint = std::nearbyint(num3);
                     result = factorial(num4longint);
                 }
-            } 
-        } else {
-            std::cerr << "An error has occured. Restarting program.";
+            } else if (operation == "syntax help" || operation == "help" || operation == "syntax") {
+                std::cout << "- SYNTAX HELP";
+                std::cout << "- Numbers 1 and 2 are used for the operations that involve two numbers." << std::endl;
+                std::cout << "- Examples: +, -, *, /, ^ (powers)" << std::endl;
+                std::cout << "- Number 3 is used for things that only need one number." << std::endl;
+                std::cout << "- Examples: sqrt, cbrt, abs. value, n!" << std::endl;
+                continue;
+            }
+        } else if (category == "trigonometric" || category == "trig" || category == "2") {
+            std::cout << "Clearing display.";
             system("clear");
-            continue;
+            std::cout << "Input the number used for the trignometric operation: ";
+            std::cin >> num3;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << std::endl << "Enter the operation'from the list below: " << std::endl;
+            std::cout << "1. Usual Operations (+, -, *, /, sqrt, ^ (power), cbrt (cube root))" << std::endl;
+            std::cout << "2. Sine (sin)" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Entered: ";
+            std::cin >> operation;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            operation = toLowerCase(operation);
         }
 
         // Display results
@@ -143,6 +160,12 @@ int main() {
         std::cout << "- Second number was: " << num2 << std::endl;
         std::cout << "- Third number was: " << num3 << std::endl;
         std::cout << "- Operation done was: " << operation << std::endl;
+        if (category == "trigonometric" || category == "trig" || category == "2") { 
+            std::cout << "- Operation done was: " << trigOperation << std::endl;
+        } else {
+            std::cout << "- Operation done was: " << operation << std::endl;
+        }
+
         std::cout << "- Result is: " << result << std::endl;
 
         // Continue or exit
@@ -166,7 +189,6 @@ int main() {
             }
         }
     }
-
     std::cout << "System returned error code 0." << std::endl;
     system("clear");
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
