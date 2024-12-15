@@ -8,6 +8,8 @@
 #include <cctype> // For std::tolower - basically also some stuff to make the code case-insensitive
 #include <string> // To make life 7000 times easier when it comes to strings
 
+#define MATHEMATICAL_PI
+
 std::string toLowerCase(const std::string& str) {
     std::string lowerStr = str;
     std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
@@ -27,9 +29,11 @@ unsigned long long factorial(unsigned int n) {
     return result;
 }
 
-
-
+void sleep_ms(int milliseconds) {
+       std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds)); // Sleep function to make code readability a bit easier. Won't help much.
+}
 int main() {
+    // Declared variables
     double num1, num2, num3, result;
     unsigned long long int num4longint;
     std::string operation, trigOperation, angleType, category, subCategory;
@@ -40,19 +44,17 @@ int main() {
     system("clear");
     std::cout << std::scientific << std::setprecision(16) << std::defaultfloat; // for uhh cool decimal stuff
     while (true) {
-        
-        // Currently, this code has been left unused. It will be fully implemented in v0.19.
         std::cout << "Select a category:" << std::endl;
         std::cout << "1. Basic Operations (+, -, *, /, sqrt, ^, factorial, abs.)" << std::endl;
         std::cout << "2. Trigonometric Operations (sin, cos, tan)" << std::endl;
         std::cout << "3. Conversion Operations" << std::endl;
-        std::cout << "4. Experimental Operations (Solve for variable)" << std::endl;
         std::cout << "4. Help Screen" << std::endl;
         std::cout << "5. Release Notes" << std::endl;
         std::cout << std::endl;
         std::cout << "Category selected: ";
         std::cin >> category;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clears buffer
+        std::cout << std::endl;
         category = toLowerCase(category);
 
         // This is gonna be part of the TO-DO, bleh
@@ -73,7 +75,7 @@ int main() {
             continue;
             // Next up, get ready for the most unreadable mess ever!
         } else if (category == "basic" || category == "1") { 
-            std::cout << "Clearing display.";
+            std::cout << "Clearing display." << std::endl;
             system("clear");
             std::cout << "Input the first number: ";
             std::cin >> num1;
@@ -139,29 +141,83 @@ int main() {
                 continue;
             }
         } else if (category == "trigonometric" || category == "trig" || category == "2") {
-            std::cout << "Clearing display.";
+            std::cout << "Clearing display." << std::endl;
             system("clear");
             std::cout << "Input the number used for the trignometric operation: ";
             std::cin >> num3;
+            std::cout << std::endl;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            std::cout << std::endl << "Enter the operation'from the list below: " << std::endl;
-            std::cout << "1. Usual Operations (+, -, *, /, sqrt, ^ (power), cbrt (cube root))" << std::endl;
+            std::cout << std::endl << "Enter the trigonometric operation from the list below: " << std::endl;
+            std::cout << "1. Cosine (cos)" << std::endl;
             std::cout << "2. Sine (sin)" << std::endl;
+            std::cout << "3. Tangent (tan)" << std::endl;
             std::cout << std::endl;
             std::cout << "Entered: ";
-            std::cin >> operation;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            operation = toLowerCase(operation);
-        }
+            std::cin >> trigOperation;
+            std::cout << std::endl;
+            trigOperation = toLowerCase(trigOperation);
+
+            std::cout << "Use degrees or radians? (deg or rad):" << std::endl;
+            std::cout << "Entered: ";
+            std::cin >> angleType;
+            std::cout << std::endl;
+            angleType = toLowerCase(angleType);
+
+            // This is messy, so I'll add more comments to make it a bit more readable.
+            if (trigOperation == "sin" || trigOperation == "sine") {
+                if (angleType == "deg" || angleType == "d" || angleType == "degrees" || angleType == "degree") { 
+                    // The above checks if it is "deg", "d", "degrees", or "degree". May switch to a switch-case (pun not intended.)
+                    result = std::sin(num3 * M_PI / 180 );
+                } else if (angleType == "rad" || angleType == "r" || angleType == "radians" || angleType == "radian") {
+                    // The above checks the same way as the degrees does, but it's just radians.
+                    result = std::sin(num3); // Uses radians by default.
+                } else {
+                    std::cerr << "Invalid input for angle type or input error. Returning to beginning.";
+                    // Error here..
+                    continue;
+                }
+            } else if (trigOperation == "cos" || angleType == "cosine") {
+                if (angleType == "deg" || angleType == "d" || angleType == "degrees" || angleType == "degree") {
+                    // The above checks for degrees.
+                    result = std::cos(num3 * M_PI / 180);
+                } else if (angleType == "rad" || angleType == "r" || angleType == "radians" || angleType == "radian") {
+                    // The above checks for radians.
+                    result = std::cos(num3); // Uses radians by default.
+                } else {
+                    std::cerr << "Invalid input for angle type or input error. Returning to beginning.";
+                    // Another error here...
+                    continue;
+                }
+            } else if (trigOperation == "tan") {
+                if (angleType == "deg" || angleType == "d" || angleType == "degrees" || angleType == "degree") {
+                    // Checks for degrees
+                    result = std::tan(num3 * M_PI / 180);
+                } else if (angleType == "rad" || angleType == "r" || angleType == "radians" || angleType == "radian") {
+                    // Checks for radians
+                    result = std::tan(num3);
+                } else {
+                    std::cerr << "Invalid input for angle type or input error. Returning to beginning.";
+                    // Yet another error here....
+                    continue;
+                }
+            } else {
+                std::cerr << "Invalid trigonometric function. Returning to beginning.";
+                continue; 
+                // Even more error handling!!!!!
+            }
+        } else if (category == "conversion operations" || category == "conversion" || category == "conversions" || category == "4") {
+            std::cout << "Please note that this section is still being worked on. \nI'll just return you to the beginning of this program.";
+            system("clear");
+            
+        } 
 
         // Display results
         system("clear");
         std::cout << "- First number was: " << num1 << std::endl;
         std::cout << "- Second number was: " << num2 << std::endl;
         std::cout << "- Third number was: " << num3 << std::endl;
-        std::cout << "- Operation done was: " << operation << std::endl;
         if (category == "trigonometric" || category == "trig" || category == "2") { 
-            std::cout << "- Operation done was: " << trigOperation << std::endl;
+            std::cout << "- Trigonometric operation done was: " << trigOperation << std::endl;
         } else {
             std::cout << "- Operation done was: " << operation << std::endl;
         }
@@ -189,8 +245,8 @@ int main() {
             }
         }
     }
-    std::cout << "System returned error code 0." << std::endl;
+    std::cout << "Exiting...";
     system("clear");
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    sleep_ms(1000);
     return 0;
 }

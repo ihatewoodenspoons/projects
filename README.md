@@ -15,3 +15,7 @@ Anyway, peace out. I'll develop random projects every once in a while and add th
 
 
 * Do not look at any issues made by me, they are all extremely stupid.
+
+Timeline (as of Dec 14, 2024)
+Dec 14, 2024: Finding ideas for a new project
+Dec 14, 2024: Deprecated Calculator.

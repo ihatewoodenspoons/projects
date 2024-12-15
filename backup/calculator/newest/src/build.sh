@@ -6,6 +6,9 @@ SRC_FILES="calculator.cpp"
 # Set the output executable
 OUTPUT="calculator"
 
+# Link libraries
+LINKEDLIBS="Blank for now"
+
 # Compile the program
 g++ -std=c++17 $SRC_FILES -o $OUTPUT 
 
