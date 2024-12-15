@@ -16,6 +16,7 @@ Anyway, peace out. I'll develop random projects every once in a while and add th
 
 * Do not look at any issues made by me, they are all extremely stupid.
 
-Timeline (as of Dec 14, 2024)
+Timeline (as of Dec 15, 2024)
+Dec 15, 2024: Nvm lol time to get back to doing calculator
 Dec 14, 2024: Finding ideas for a new project
-Dec 14, 2024: Deprecated Calculator.
+Dec 14, 2024: Ended Calculator.
