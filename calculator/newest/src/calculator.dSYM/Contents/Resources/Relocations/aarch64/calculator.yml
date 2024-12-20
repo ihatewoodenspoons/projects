@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/jesusmoronta/Documents/GitHub/basictermcalc/calculator/newest/src/calculator'
+relocations:     []
+...
